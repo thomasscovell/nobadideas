@@ -1,0 +1,100 @@
+/* style.css - For the player-facing experience */
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Deck Card Styling */
+.deck-card {
+    aspect-ratio: 3 / 4;
+    perspective: 1000px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.deck-card:hover {
+    transform: scale(1.05);
+}
+
+.deck-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 0.5rem;
+}
+
+.deck-card.is-flipping .deck-card-inner {
+    transform: rotateY(180deg);
+}
+
+.deck-card-front,
+.deck-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.deck-card-front {
+    background-color: transparent; /* gray-800 */
+}
+
+.deck-card-back {
+    background-color: #374151; /* gray-700 */
+    transform: rotateY(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    /* You could add a card back pattern here */
+}
+
+.deck-title-overlay {
+    display: none;
+}
+
+/* Card Display Overlay */
+#card-display-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 1rem;
+}
+
+#drawn-card-container {
+    max-width: 500px;
+    width: 100%;
+}
+
+/* Animation for the card appearing */
+#drawn-card {
+    transform: scale(0.7);
+    opacity: 0;
+    animation: zoomIn 0.3s ease-out forwards;
+}
+
+@keyframes zoomIn {
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Ensure deck card images fit within the card front without being cropped */
+.deck-card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* This will fit the entire image, letterboxing if necessary */
+}
